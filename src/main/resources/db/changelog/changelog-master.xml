@@ -4,11 +4,14 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
-
-    <include file="db/changelog/01-create-customer.xml" />
-    <include file="db/changelog/02-create-product.xml" />
-    <include file="db/changelog/03-create-cart.xml" />
-    <include file="db/changelog/04-create-cartitem.xml" />
-    <include file="db/changelog/05-create-order.xml" />
-    <include file="db/changelog/06-create-orderitem.xml" />
+    <!-- entities -->
+    <include file="db/changelog/changes/01-create-customer.xml" />
+    <include file="db/changelog/changes/02-create-product.xml" />
+    <include file="db/changelog/changes/03-create-cart.xml" />
+    <include file="db/changelog/changes/04-create-cartitem.xml" />
+    <include file="db/changelog/changes/05-create-order.xml" />
+    <include file="db/changelog/changes/06-create-orderitem.xml" />
+    <!-- data -->
+    <include file="db/changelog/data/07-insert-products-data.xml" />
+    <include file="db/changelog/data/08-insert-customers-data.xml" />
 </databaseChangeLog>
