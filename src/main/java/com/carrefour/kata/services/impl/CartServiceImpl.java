@@ -1,9 +1,7 @@
 package com.carrefour.kata.services.impl;
 
 import com.carrefour.kata.domains.*;
-import com.carrefour.kata.exceptions.CustomerNotFoundException;
-import com.carrefour.kata.exceptions.InsufficientInventoryException;
-import com.carrefour.kata.exceptions.ProductNotFoundException;
+import com.carrefour.kata.exceptions.*;
 import com.carrefour.kata.repository.CartRepository;
 import com.carrefour.kata.repository.CustomerRepository;
 import com.carrefour.kata.repository.ProductRepository;
@@ -65,6 +63,33 @@ public class CartServiceImpl implements CartService {
         Cart cart = cartRepository.findByCustomerId(customerId)
                 .orElseThrow(() -> new CustomerNotFoundException("Customer not found with id " + customerId));
         return cartMapper.toDto(cart);
+    }
+
+    @Override
+    @Transactional
+    public void removeProductFromCart(Long customerId, Long productId) {
+        log.info("Removing Product: {} from cart of user: {}", productId, customerId);
+
+        if(customerRepository.existsById(customerId)) {
+            var cart = cartRepository.findByCustomerId(customerId)
+                    .orElseThrow(() -> new CartNotFoundException("Cart not found for customer id " + customerId));
+            var cartItemOptional = cart.getCartItems().stream()
+                    .filter(item -> item.getProduct().getId().equals(productId))
+                    .findFirst();
+            if (cartItemOptional.isPresent()) {
+                var cartItem = cartItemOptional.get();
+                int newInventoryCount = cartItem.getProduct().getInventoryCount() + cartItem.getQuantity();
+                cartItem.getProduct().setInventoryCount(newInventoryCount);
+                productRepository.save(cartItem.getProduct());
+                cart.getCartItems().remove(cartItem);
+                cartRepository.save(cart);
+                log.info("Product: {} removed from cart. Updated inventory count: {}", productId, newInventoryCount);
+            } else {
+                throw new ProductNotInCartException("Product not found in cart with id: " + productId);
+            }
+        }else {
+            throw new CustomerNotFoundException("Customer not found with id " + customerId);
+        }
     }
 
     private Cart createNewCartForCustomer(Customer customer) {

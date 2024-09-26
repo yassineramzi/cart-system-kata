@@ -21,7 +21,7 @@ import org.mockito.Mock;
 
 import java.util.Optional;
 
-public class CartServiceImplTest {
+public class AddItemToCartTestCase {
 
     @Mock
     private CartRepository cartRepository;

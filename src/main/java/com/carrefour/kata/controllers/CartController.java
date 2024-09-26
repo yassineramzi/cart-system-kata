@@ -32,7 +32,7 @@ public class CartController {
         EntityModel<CartDto> cartModel = EntityModel.of(cart);
 
         cartModel.add(linkTo(methodOn(CartController.class).getCartByCustomer(addProductToCartDto.getCustomerId())).withSelfRel());
-
+        cartModel.add(linkTo(methodOn(CartController.class).removeProductFromCart(addProductToCartDto.getCustomerId(), addProductToCartDto.getProductId())).withRel("remove_product"));
         return ResponseEntity.ok(cartModel);
     }
 
@@ -48,4 +48,10 @@ public class CartController {
         return ResponseEntity.ok(cartModel);
     }
 
+    @DeleteMapping("/{customerId}/customer/{productId}/product")
+    public ResponseEntity<Void> removeProductFromCart(@PathVariable Long customerId, @PathVariable Long productId) {
+        log.info("Delete product : {} , from cart by customer Id : {}",productId, customerId);
+        cartService.removeProductFromCart(customerId, productId);
+        return ResponseEntity.noContent().build();
+    }
 }

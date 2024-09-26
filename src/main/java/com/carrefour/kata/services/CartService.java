@@ -8,4 +8,5 @@ public interface CartService {
 
     CartDto getCartByCustomerId(Long customerId);
 
+    void removeProductFromCart(Long customerId, Long productId);
 }
