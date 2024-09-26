@@ -1,67 +1,36 @@
-# 🛒 Online Shopping - a Kata
+#### Cart and Order Service API
+#### This API provides the functionality to manage a shopping cart and orders for an e-commerce system. It includes the following operations:
 
-## Instructions
-The exercise is made of a mandatory part, the [Minimum Valuable Product](#mvp), and [bonus features](#features-bonus) to make the most of your remaining time and stand out.\
-The stories have no acceptance criteria, it's up to you to define them after your functional analysis of the story.
+- Add products to a cart
+- Remove products from a cart
+- Confirm an order
+- Update inventory based on customer actions
+- Track the order status
 
-**If you are missing some information, make a choice and stick to it.**
+#### Technologies Used
 
-### Constraints
-- Spring-boot 3.x.x
 - Java 21
-- Git
-- Enhance this `README.md` file -- _Explains the potential intricacies of your implementation and how to launch your project_.
+- Spring Boot
+- Spring Data JPA
+- Spring HATEOAS
+- Swagger (SpringDoc OpenAPI)
+- H2 Database (for local testing)
+- Liquibase (for database version control)
+- Docker
 
-### Delivery
-The code should be available in an accessible git repo ( github, gitlab ...).
+#### How to Run the Application
+Clone the repository:
 
-### Assessment
-**There is no "right" way to do this exercise.**\
-We are interested in your implementation choices, your technique, the code architecture and the compliance with the constraints.\
-_Also pay attention to the size of your commits and their messages._
+#### Swagger Documentation: Once the application is running, you can access the Swagger UI to explore and test the APIs:
 
-### Tips
-To quickly create your project base, use [spring initializr](https://start.spring.io/)
+http://localhost:8080/swagger-ui.html
 
-## Exercise
-### MVP
-#### User Story
-> As a customer I can add available product to my cart.
+#### CI 
 
-#### User Story
-> As a customer, I can remove products from my cart.
+For the CI part we used Github Actions, to build and publish the test report,
 
-#### User Story
-> Product inventory is updated based on customers' actions.
+#### TO BE COMPLETED 
 
-#### User Story
-> As a customer, I can confirm my order and track its status.
-
-
-### Bonus Features
-The following features are optional and not exhaustive.\
-They have no priority between them, you can implement the ones you are interested in or propose others.
-
-#### REST API
-- Propose an HTTP REST API to interact with the services implemented in the MVP
-- Implement HATEOAS principles in your REST API
-- Document the REST API
-- Secure the API
-- Use a non-blocking solution
-
-#### Persistence
-- Propose a data persistence solution
-- Propose a cache solution
-
-#### Stream
-- Propose a data streaming solution
-- Propose a solution for consuming and/or producing events
-
-### CI/CD
-- Propose a CI/CD system for the project
-- Propose End-to-End tests for your application
-
-### Packaging
-- Create a container of your application
-- Deploy your application in a pod
-- Create a native image of your application... (The response was truncated because it has reached the token limit. Try to increase the token limit if you need a longer response.)
+- Create the Docker image and publish it with JIB,
+- Add a controllerAdvice to hanlde different exceptions thrown by the application,
+- Test the Docker image for vulnerabilities and publish report as action artifact
