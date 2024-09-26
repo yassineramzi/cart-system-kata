@@ -44,7 +44,6 @@ jobs:
       - name: Junit Test Dashboard
         uses: janisz/action@v2
         with:
-          paths: target/surefire-reports/*.xml # Path to your JUnit XML files
-          output: junit-results.html # Optional: Name of the output file
-          show: 'tests'
+          paths: target/surefire-reports/*.xml
+          output: junit-results.html
           
