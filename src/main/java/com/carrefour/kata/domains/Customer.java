@@ -1,14 +1,12 @@
 package com.carrefour.kata.domains;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 import java.util.List;
 
 @Entity
-@Getter
-@Setter
+@Data
 public class Customer {
 
     @Id
@@ -21,6 +19,6 @@ public class Customer {
     @OneToMany(mappedBy = "customer")
     private List<Order> orders;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "customer")
     private Cart cart;
 }

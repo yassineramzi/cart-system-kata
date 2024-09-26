@@ -3,7 +3,7 @@ spring:
     name: kata
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:h2:file:./target/h2db/db/crm_thinline
+    url: jdbc:h2:file:./target/h2db/db/kata_db
     username: root
     password: root
     hikari:

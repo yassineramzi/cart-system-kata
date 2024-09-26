@@ -1,15 +1,12 @@
 package com.carrefour.kata.domains;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
-
+import lombok.Data;
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
-@Getter
-@Setter
+@Data
 public class OrderItem {
 
     @Id
