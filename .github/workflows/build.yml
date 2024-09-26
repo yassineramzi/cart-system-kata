@@ -45,5 +45,9 @@ jobs:
         uses: janisz/action@v2
         with:
           paths: target/surefire-reports/*.xml
-          output: junit-results.html
-          
+          output: junit-results.html    
+      - name: Upload JUnit results
+        uses: actions/upload-artifact@v3
+        with:
+          name: junit-results
+          path: junit-results.html
