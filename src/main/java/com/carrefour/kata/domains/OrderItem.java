@@ -2,10 +2,9 @@ package com.carrefour.kata.domains;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import java.time.LocalDateTime;
-import java.util.List;
 
-@Entity
+@Entity(name = "order_item")
+@Table(name = "order_item")
 @Data
 public class OrderItem {
 
@@ -13,17 +12,14 @@ public class OrderItem {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    private Customer customer;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "order_id", nullable = false)
+    private Order order;
 
-    @Enumerated(EnumType.STRING)
-    private OrderStatus status; // Enum to track status (PENDING, SHIPPED, DELIVERED, etc.)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "product_id", nullable = false)
+    private Product product;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    private List<OrderItem> orderItems;
-
-    private double totalPrice;
-
-    private LocalDateTime orderDate;
+    private int quantity;
 
 }

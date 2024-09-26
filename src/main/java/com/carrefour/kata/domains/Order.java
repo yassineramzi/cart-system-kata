@@ -6,7 +6,7 @@ import lombok.Data;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Entity
+@Entity(name = "orders")
 @Data
 public class Order {
 
@@ -20,7 +20,7 @@ public class Order {
     @Enumerated(EnumType.STRING)
     private OrderStatus status; // Enum to track status (PENDING, SHIPPED, DELIVERED, etc.)
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<OrderItem> orderItems;
 
     private double totalPrice;

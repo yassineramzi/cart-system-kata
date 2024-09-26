@@ -9,7 +9,7 @@ import java.util.List;
  * @param <E> - Entity type parameter.
  */
 
-public sealed interface EntityMapper<D, E> permits CustomerMapper, CartMapper, CartItemMapper, ProductMapper {
+public sealed interface EntityMapper<D, E> permits CustomerMapper, CartMapper, CartItemMapper, ProductMapper, OrderMapper, OrderItemMapper {
 
     E toEntity(D dto);
 
